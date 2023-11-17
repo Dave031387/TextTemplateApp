@@ -16,6 +16,7 @@
         <PackageOutputPath>C:\Users\dave0\Packages</PackageOutputPath>
         <EnforceCodeStyleInBuild>True</EnforceCodeStyleInBuild>
         <PackageTags>c# model wrapper mvvm property change notification revertible validation</PackageTags>
+        <RepositoryUrl>https://github.com/Dave031387/TextTemplateApp/tree/master/ModelWrapperBase</RepositoryUrl>
     </PropertyGroup>
 
     <ItemGroup>

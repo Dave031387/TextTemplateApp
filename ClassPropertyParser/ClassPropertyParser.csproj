@@ -15,6 +15,7 @@
 	    <PackageOutputPath>C:\Users\dave0\Packages</PackageOutputPath>
 	    <EnforceCodeStyleInBuild>True</EnforceCodeStyleInBuild>
 	    <PackageTags>c# class type property parser utility</PackageTags>
+	    <RepositoryUrl>https://github.com/Dave031387/TextTemplateApp/tree/master/ClassPropertyParser</RepositoryUrl>
     </PropertyGroup>
 
 	<ItemGroup>

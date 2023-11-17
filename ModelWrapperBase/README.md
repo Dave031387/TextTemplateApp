@@ -125,7 +125,7 @@ public class PersonWrapper : ModelWrapper<Person>
 > be defined in a ___ModelWrappers___ (or ___Wrappers___) project. It is generally a bad idea to mix model classes and model wrapper classes in
 > the same project since they serve very different functions.
 
-# _ChangeTrackingCollection_ Base Class
+# ___ChangeTrackingCollection___ Base Class
 The ___ChangeTrackingCollection___ base class is used to wrap collection properties in a wrapped model class. It extends the 
 ___System.Collections.ObjectModel.ObservableCollection\<T>___ class by implementing the ___System.ComponentModel.IRevertibleChangeTracking___
 interface. The class tracks all additions and deletions of items to/from the collection. It also provides a mechanism for accepting or rejecting
@@ -1565,3 +1565,8 @@ public class PersonWrapper : ModelClass<Person>
     }
 }
 ```
+
+---
+# Compatibility
+The ___ModelWrapperBase___ class library was developed using ___C# 10.0___ and ___.NET 6.0___ for the ___Windows___ desktop targeting
+___Windows 7___ and above.

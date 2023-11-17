@@ -1037,3 +1037,8 @@ public class MyTemplateProcessor : TextTemplateConsoleBase
 
 The example above will create the file _"mygeneratedtext.txt"_ in the _"generated"_ subdirectory located under the solution directory. The file will
 contain the contents of the generated text buffer. The generated text buffer will be cleared after the file is created.
+
+---
+# Compatibility
+The ___TextTemplateProcessor___ class library was developed using ___C# 10.0___ and ___.NET 6.0___ for the ___Windows___ desktop targeting
+___Windows 7___ and above.

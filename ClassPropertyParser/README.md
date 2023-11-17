@@ -58,7 +58,7 @@ public IClassPropertyParser parser = new(typeof(Models.Address));
 > of class types without having to check whether or not a given class type is one that should be parsed.
 
 ## Properties
-### ClassTypes
+### ___ClassTypes___
 The ___ClassTypes___ property returns an ___IEnumerable___ collection of ___Type___ objects corresponding to the class types found in a single assembly. This
 collection is populated by either calling the ___ClassPropertyParser___ constructor that takes a ___Type___ argument, or by calling the
 ___GetClassTypes___ method.
@@ -69,7 +69,7 @@ Example:
 IEnumerable<Type> classTypes = parser.ClassTypes;
 ```
 
-### CollectionProperties
+### ___CollectionProperties___
 The ___CollectionProperties___ property returns an ___IEnumerable___ collection of ___PropertyInfo___ objects corresponding to the collection properties
 found in a single class type. This collection is populated by calling either the ___GetAllProperties___ or the ___GetCollectionProperties___ methods.
 
@@ -79,7 +79,7 @@ Example:
 IEnumerable<PropertyInfo> collectionProperties = parser.CollectionProperties;
 ```
 
-### ComplexProperties
+### ___ComplexProperties___
 The ___ComplexProperties___ property returns an ___IEnumerable___ collection of ___PropertyInfo___ objects corresponding to the complex properties found in a
 single class type. This collection is populated by calling either the ___GetAllProperties___ or the ___GetComplexProperties___ methods.
 
@@ -89,7 +89,7 @@ Example:
 IEnumerable<PropertyInfo> complexProperties = parser.ComplexProperties;
 ```
 
-### SimpleProperties
+### ___SimpleProperties___
 The ___SimpleProperties___ property returns an ___IEnumerable___ collection of ___PropertyInfo___ objects corresponding to the simple properties found in a
 single class type. This collection is populated by calling either the ___GetAllProperties___ or the ___GetSimpleProperties___ methods.
 
@@ -100,7 +100,7 @@ IEnumerable<PropertyInfo> simpleProperties = parser.SimpleProperties;
 ```
 
 ## Methods
-### GetAllProperties
+### ___GetAllProperties___
 The ___GetAllProperties___ method takes a ___Type___ argument which specifies the class type for which you want to extract all property info. This method
 simply makes calls to the ___GetCollectionProperties___, ___GetComplexProperties___, and  ___GetSimpleProperties___ methods, passing in the given
 ___Type___ argument to each one. If the ___Type___ argument happens to be ___null___, then all property collections will be cleared and will be empty when
@@ -112,7 +112,7 @@ Example:
 parser.GetAllProperties(typeof(Models.CompanyInfo));
 ```
 
-### GetClassTypes
+### ___GetClassTypes___
 The ___GetClassTypes___ method uses reflection to retrieve ___Type___ information for all class types residing in a single .NET assembly. The method takes
 a single ___Type___ argument which supplies a single class type from the assembly of interest. This method clears the ___ClassTypes___ property and then
 populates it with ___Type___ objects corresponding to each class type that is found in the assembly. The method then returns the resulting collection to
@@ -124,7 +124,7 @@ Example:
 IEnumerable<Type> classTypes = parser.GetClassTypes(typeof(Models.Person));
 ```
 
-### GetCollectionProperties
+### ___GetCollectionProperties___
 The ___GetCollectionProperties___ method uses reflection to retrieve ___PropertyInfo___ objects for all collection properties defined in a single class
 type. The method takes a single ___Type___ argument which gives the class type of interest. The method clears the ___CollectionProperties___ property
 and then populates it with ___PropertyInfo___ objects corresponding to each collection property that is defined in the given class type. The method
@@ -136,7 +136,7 @@ Example:
 IEnumerable<PropertyInfo> collectionProperties = parser.GetCollectionProperties(typeof(Models.CompanyInfo));
 ```
 
-### GetComplexProperties
+### ___GetComplexProperties___
 The ___GetComplexProperties___ method uses reflection to retrieve ___PropertyInfo___ objects for all complex properties defined in a single class type. The
 method takes a single ___Type___ argument which gives the class type of interest. The method clears the ___ComplexProperties___ property and then populates
 it with ___PropertyInfo___ objects corresponding to each complex property that is defined in the given class type. The method then returns the resulting
@@ -148,7 +148,7 @@ Example:
 IEnumerable<PropertyInfo> complexProperties = parser.GetComplexProperties(typeof(Models.CompanyInfo));
 ```
 
-### GetSimpleProperties
+### ___GetSimpleProperties___
 The ___GetSimpleProperties___ method uses reflection to retrieve ___PropertyInfo___ objects for all simple properties defined in a single class type. The
 method takes a single ___Type___ argument which gives the class type of interest. The method clears the ___SimpleProperties___ property and then populates
 it with ___PropertyInfo___ objects corresponding to each simple property that is defined in the given class type. The method then returns the resulting
@@ -160,7 +160,7 @@ Example:
 IEnumerable<PropertyInfo> simpleProperties = parser.GetSimpleProperties(typeof(Models.CompanyInfo));
 ```
 
-### GetTypeName
+### ___GetTypeName___
 The ___GetTypeName___ method is a static method that takes a ___Type___ as an argument and then returns the full type name to the caller as a ___string___.
 Generic types are formatted with the list of generic type arguments appearing as a comma-separated list between angle brackets after the generic type name.
 
@@ -170,7 +170,7 @@ Example:
 string fullTypeName = ClassPropertyParser.GetTypeName(typeof(Models.Person));
 ```
 
-## IClassPropertyParser Interface
+## ___IClassPropertyParser___ Interface
 The ___IClassPropertyParser___ interface defines all of the methods and properties (with the exception of the ___GetTypeName___ static property)
 described in the __Methods__ and __Properties__ sections above.
 

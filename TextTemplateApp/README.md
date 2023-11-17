@@ -55,4 +55,7 @@ The ___TextTemplateApp___ solution contains nine projects:
 The ___xUnit___ and ___FluentAssertions___ NuGet packages are used in all three unit test projects. The ___Moq___ package is used in the
 ___TextTemplateProcessor.Tests___ unit test project.
 
-All projects in the solution were written in C# 10.0 and .NET 6.0
+---
+# Compatibility
+All projects in the ___TextTemplateApp___ solution were developed using ___C# 10.0___ and ___.NET 6.0___ for the ___Windows___ desktop targeting
+___Windows 7___ and above.
