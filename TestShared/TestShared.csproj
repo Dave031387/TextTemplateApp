@@ -1,0 +1,18 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net6.0-windows</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+        <IsPublishable>False</IsPublishable>
+        <Authors>David R Slocum</Authors>
+        <NeutralLanguage>en-US</NeutralLanguage>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="..\ModelWrapperBase\ModelWrapperBase.csproj" />
+        <ProjectReference Include="..\TestModels\TestModels.csproj" />
+        <ProjectReference Include="..\TextTemplateProcessor\TextTemplateProcessor.csproj" />
+    </ItemGroup>
+
+</Project>

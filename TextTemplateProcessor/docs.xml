@@ -1,0 +1,1305 @@
+﻿<docs>
+	<members name="consolewriter">
+		<ConsoleWriter>
+			<summary>
+				The <see cref="ConsoleWriter" /> class is used by the Text Template Processor for writing
+				messages and log entries to the <see cref="Console" />.
+			</summary>
+		</ConsoleWriter>
+		<WriteLine1>
+			<summary>
+				Writes a single <see langword="string" /> message to the <see cref="Console" />.
+			</summary>
+			<param name="message">
+				The message to be written the <see cref="Console" />.
+			</param>
+		</WriteLine1>
+		<WriteLine2>
+			<summary>
+				Writes a string message containing a single <see langword="string" /> format
+				item to the <see cref="Console" />.
+			</summary>
+			<param name="message">
+				The message to be written to the <see cref="Console" />.<br />
+				(Must contain one <see langword="string" /> format item.)
+			</param>
+			<param name="arg">
+				A <see langword="string" /> value that will be substituted for the<br />
+				<see langword="string" /> format item in the <paramref name="message" /> string.
+			</param>
+			<example>
+				The following call to <see cref="WriteLine(string, string)" /> writes the message "My
+				name is Bob." to the <see cref="Console" />:
+				<code>
+					ConsoleWriter.WriteLine("My name is {0}.", "Bob");
+				</code>
+			</example>
+		</WriteLine2>
+		<WriteLine3>
+			<summary>
+				Writes a string message containing two <see langword="string" /> format items
+				to the <see cref="Console" />.
+			</summary>
+			<param name="message">
+				The message to be written to the <see cref="Console" />.<br />
+				(Must contain two <see langword="string" /> format items.)
+			</param>
+			<param name="arg1">
+				A <see langword="string" /> value that will be substituted for the<br />
+				first <see langword="string" /> format item in the <paramref name="message" /> string.
+			</param>
+			<param name="arg2">
+				A <see langword="string" /> value that will be substituted for the<br />
+				second <see langword="string" /> format item in the <paramref name="message" /> string.
+			</param>
+			<example>
+				The following call to <see cref="WriteLine(string, string, string)" /> writes the message
+				"Bob drives a truck to work." to the <see cref="Console" />:
+				<code>
+					ConsoleWriter.WriteLine("{0} drives a {1} to work.", "Bob", "truck");
+				</code>
+			</example>
+		</WriteLine3>
+		<WriteLogEntries>
+			<summary>
+				Writes all the log entries contained in the <see cref="ConsoleLogger.LogEntries" />
+				collection to the <see cref="Console" /> and then clears the collection.
+			</summary>
+		</WriteLogEntries>
+	</members>
+	<members name="texttemplateconsolebase">
+		<TextTemplateConsoleBase>
+			<summary>
+				<see cref="TextTemplateConsoleBase" /> is an abstract base class from which to derive a
+				<see cref="Console" /> class for generating text files from text template files.
+			</summary>
+		</TextTemplateConsoleBase>
+		<Constructor1>
+			<summary>
+				Creates an instance of the <see cref="TextTemplateConsoleBase" /> class.
+			</summary>
+			<remarks>
+				This version of the constructor creates an instance of
+				<see cref="TextTemplateConsoleBase" /> having an uninitialized
+				<see cref="TextTemplateProcessor" />. (No text template file or output directory given.)
+			</remarks>
+		</Constructor1>
+		<Constructor2>
+			<summary>
+				Creates an instance of the <see cref="TextTemplateConsoleBase" /> class and loads the
+				template file.
+			</summary>
+			<param name="path">
+				The file path of the text template file.
+			</param>
+		</Constructor2>
+		<OutputDirectory>
+			<summary>
+				Gets the output directory path where generated text files will be written to.
+			</summary>
+		</OutputDirectory>
+		<SolutionDirectory>
+			<summary>
+				Gets the directory path where the Visual Studio solution file is located.
+			</summary>
+		</SolutionDirectory>
+		<ShowContinuationPrompt>
+			<summary>
+				Shows a message on the <see cref="Console" /> and then waits for the ENTER key to be
+				pressed.
+			</summary>
+			<param name="message">
+				An optional parameter that gives the message to be displayed on the
+				<see cref="Console" />.
+			</param>
+			<returns>
+				Returns a <see langword="string" /> containing any text the user typed in the
+				<see cref="Console" /> before pressing the ENTER key.
+			</returns>
+			<remarks>
+				If the optional parameter is omitted, the default message "Press [ENTER] to continue..."
+				will be displayed.
+			</remarks>
+		</ShowContinuationPrompt>
+		<ClearOutputDirectory>
+			<summary>
+				Deletes all files that are in the <see cref="OutputDirectory" />.
+			</summary>
+			<remarks>
+				This doesn't perform a recursive deletion of files. If the <see cref="OutputDirectory" />
+				contains any folders, those folders and their contents will not be deleted.
+			</remarks>
+		</ClearOutputDirectory>
+		<LoadTemplate>
+			<summary>
+				Loads the specified text template file into the <see cref="ITextTemplateProcessor" />
+				instance contained within this <see cref="TextTemplateConsoleBase" /> instance.
+			</summary>
+			<param name="filePath">
+				The file path of the text template file.
+			</param>
+			<remarks>
+				An error message will be written to the log if the specified file path isn't valid.
+			</remarks>
+		</LoadTemplate>
+		<SetOutputDirectory>
+			<summary>
+				Sets the <see cref="OutputDirectory" /> to the specified directory path.
+			</summary>
+			<param name="directoryPath">
+				The output directory path.
+			</param>
+			<remarks>
+				The specified directory path will be created if it doesn't already exist. An error
+				message will be written to the log if the specified directory path isn't valid.
+			</remarks>
+		</SetOutputDirectory>
+		<WriteGeneratedTextToFile>
+			<summary>
+				Writes the contents of the generated text buffer to the specified file.
+			</summary>
+			<param name="fileName">
+				The name of the file where the generated text should be written to.
+			</param>
+			<param name="resetGeneratedText">
+				A boolean flag indicating whether or not the generated text buffer should be cleared
+				after writing the contents to the file.
+			</param>
+			<remarks>
+				By default the generated text buffer will be cleared after the generated text is written
+				to the specified file. This behavior can be overridden by passing in
+				<see langword="false" /> as the optional second parameter to this method.
+			</remarks>
+		</WriteGeneratedTextToFile>
+	</members>
+	<members name="filepathexception">
+		<FilePathException>
+			<summary>
+				This exception class is used for all exceptions related to file path issues.
+			</summary>
+		</FilePathException>
+		<Constructor1>
+			<summary>
+				Initializes a new instance of the <see cref="FilePathException" /> class.
+			</summary>
+		</Constructor1>
+		<Constructor2>
+			<summary>
+				Initializes a new instance of the <see cref="FilePathException" /> class with the
+				specified error message.
+			</summary>
+			<param name="message">
+				The message that describes the error.
+			</param>
+		</Constructor2>
+		<Constructor3>
+			<summary>
+				Initializes a new instance of the <see cref="FilePathException" /> class with the
+				specified error message and a reference to the inner exception that is the cause of this
+				error.
+			</summary>
+			<param name="message">
+				The message that describes the error.
+			</param>
+			<param name="inner">
+				The exception that is the cause of the current exception.
+			</param>
+		</Constructor3>
+		<Constructor4>
+			<summary>
+				Initializes a new instance of the <see cref="FilePathException" /> class with serialized
+				data.
+			</summary>
+			<param name="info">
+				The <see cref="System.Runtime.Serialization.SerializationInfo" /> that holds the
+				serialized object data about the exception being thrown.
+			</param>
+			<param name="context">
+				The <see cref="System.Runtime.Serialization.StreamingContext" /> that contains contextual
+				information about the source or destination.
+			</param>
+		</Constructor4>
+	</members>
+	<members name="textreader">
+		<TextReader>
+			<summary>
+				The <see cref="TextReader" /> class is used for reading the contents of text files.
+			</summary>
+		</TextReader>
+		<Constructor1>
+			<summary>
+				Creates an instance of the <see cref="TextReader" /> class having an unspecified
+				(empty) file path.
+			</summary>
+		</Constructor1>
+		<Constructor2>
+			<summary>
+				Creates an instance of the <see cref="TextReader" /> class having the specified file
+				path.
+			</summary>
+			<param name="filePath">
+				The file path of an existing text file.
+			</param>
+		</Constructor2>
+		<DirectoryPath>
+			<summary>
+				Gets the directory path of the text file.
+			</summary>
+		</DirectoryPath>
+		<FileName>
+			<summary>
+				Gets the file name of the text file.
+			</summary>
+		</FileName>
+		<FullFilePath>
+			<summary>
+				Returns the full file path of the text file.
+			</summary>
+		</FullFilePath>
+		<ReadTextFile>
+			<summary>
+				Reads the contents of a text file and returns those contents as an
+				<see cref="IEnumerable{T}" /> collection of <see langword="string" /> objects.
+			</summary>
+			<returns>
+				An <see cref="IEnumerable{T}" /> collection of <see langword="string" />.
+			</returns>
+		</ReadTextFile>
+		<SetFilePath>
+			<summary>
+				Sets the file path of a text file.
+			</summary>
+			<param name="filePath">
+				The file path of an existing text file.
+			</param>
+			<remarks>
+				This method sets the <see cref="DirectoryPath" />, <see cref="FileName" />, and
+				<see cref="FullFilePath" /> properties based on the given file path. <br /> An error
+				message is written to the log if the given file path is invalid or if the file doesn't
+				exist.
+			</remarks>
+		</SetFilePath>
+		<ITextReader>
+			<summary>
+				This interface provides functionality for reading text files.
+			</summary>
+		</ITextReader>
+	</members>
+	<members name="textwriter">
+		<TextWriter>
+			<summary>
+				The <see cref="TextWriter" /> class is used for writing text to a text file.
+			</summary>
+		</TextWriter>
+		<CreateOutputFile>
+			<summary>
+				Writes an <see cref="IEnumerable{T}" /> collection of <see langword="string" /> to the
+				given text file.
+			</summary>
+			<param name="filePath">
+				The file path where the text is to be written to.
+			</param>
+			<param name="textLines">
+				The text lines to be written to the output file.
+			</param>
+			<returns>
+				Returns <see langword="true" /> if all the text is successfully written to the output
+				file.
+			</returns>
+			<remarks>
+				An error message will be written to the log if the <paramref name="textLines" /> argument
+				is null or an empty collection. <br /> An error will also be written to the log if
+				<paramref name="filePath" /> is invalid or if there are issues writing to the file. <br />
+				The output file path will be created if it doesn't already exist.
+			</remarks>
+		</CreateOutputFile>
+		<ITextWriter>
+			<summary>
+				An interface that provides functionality for writing to a text file.
+			</summary>
+		</ITextWriter>
+	</members>
+	<members name="pathvalidator">
+		<PathValidator>
+			<summary>
+				<see cref="PathValidater" /> is a static class used for validating directory paths and file
+				names to ensure they're not null, empty, contain only whitespace, or contain invalid
+				characters.
+			</summary>
+		</PathValidator>
+		<ValidatePath>
+			<summary>
+				Validates a path string to verify that it represents a valid directory path or file
+				path. <br /> Also, optionally validates that the directory or file exists if requested.
+			</summary>
+			<param name="path">
+				A file path or directory path to be validated.
+			</param>
+			<param name="isFilePath">
+				Indicates whether the <paramref name="path" /> argument is a file path (
+				<see langword="true" />) or a directory path ( <see langword="false" />). The default if
+				not specified is directory path ( <see langword="false" />).
+			</param>
+			<param name="shouldExist">
+				Indicates whether or not the file or directory must already exist. The default if not
+				specified is <see langword="false" /> (the file or directory doesn't have to exist).
+			</param>
+			<returns>
+				A tuple comprised of the full directory path and the file name as determined from the
+				<paramref name="path" /> argument.
+			</returns>
+			<exception cref="FilePathException">
+				A <see cref="FilePathException" /> is thrown if <paramref name="path" /> isn't valid.
+			</exception>
+			<remarks>
+				The file name returned in the tuple will be an empty string if the
+				<paramref name="path" /> argument is a directory path.
+			</remarks>
+		</ValidatePath>
+	</members>
+	<members name="consolelogger">
+		<ConsoleLogger>
+			<summary>
+				The <see cref="ConsoleLogger" /> class is a static class that maintains a
+				<see cref="List{T}" /> of <see cref="LogEntry" /> objects.
+			</summary>
+		</ConsoleLogger>
+		<LogEntries>
+			<summary>
+				Gets an <see cref="IEnumerable{T}" /> collection of <see cref="LogEntry" /> objects.
+			</summary>
+		</LogEntries>
+		<Clear>
+			<summary>
+				Clears the <see cref="IEnumerable{T}" /> collection of <see cref="LogEntry" /> objects.
+			</summary>
+		</Clear>
+		<Log1>
+			<summary>
+				Adds a new <see cref="LogEntry" /> object to the <see cref="LogEntries" /> collection.
+			</summary>
+			<param name="type">
+				The <see cref="LogEntryType" /> enum value corresponding to the type of
+				<see cref="LogEntry" /> object being added to the <see cref="LogEntries" /> collection.
+			</param>
+			<param name="message">
+				The log message that is being added to the <see cref="LogEntries" /> collection.
+			</param>
+		</Log1>
+		<Log2>
+			<summary>
+				Adds a new <see cref="LogEntry" /> object to the <see cref="LogEntries" /> collection.
+			</summary>
+			<param name="type">
+				The <see cref="LogEntryType" /> enum value corresponding to the type of
+				<see cref="LogEntry" /> object being added to the <see cref="LogEntries" /> collection.
+			</param>
+			<param name="location">
+				A tuple that gives the name of the segment and the line number within the segment where
+				the log message was triggered.
+			</param>
+			<param name="message">
+				The log message that is being added to the <see cref="LogEntries" /> collection.
+			</param>
+		</Log2>
+		<Log3>
+			<summary>
+				Adds a new <see cref="LogEntry" /> object to the <see cref="LogEntries" /> collection.
+			</summary>
+			<param name="type">
+				The <see cref="LogEntryType" /> enum value corresponding to the type of
+				<see cref="LogEntry" /> object being added to the <see cref="LogEntries" /> collection.
+			</param>
+			<param name="message">
+				The log message that is being added to the <see cref="LogEntries" /> collection. <br />
+				This must be a <see langword="string" /> that contains one string format argument.
+			</param>
+			<param name="arg">
+				The <see langword="string" /> value to be substituted for the string format argument in
+				the <paramref name="message" /> parameter.
+			</param>
+		</Log3>
+		<Log4>
+			<summary>
+				Adds a new <see cref="LogEntry" /> object to the <see cref="LogEntries" /> collection.
+			</summary>
+			<param name="type">
+				The <see cref="LogEntryType" /> enum value corresponding to the type of
+				<see cref="LogEntry" /> object being added to the <see cref="LogEntries" /> collection.
+			</param>
+			<param name="message">
+				The log message that is being added to the <see cref="LogEntries" /> collection. <br />
+				This must be a <see langword="string" /> that contains two string format arguments.
+			</param>
+			<param name="arg1">
+				The <see langword="string" /> value to be substituted for the first string format
+				argument in the <paramref name="message" /> parameter.
+			</param>
+			<param name="arg2">
+				The <see langword="string" /> value to be substituted for the second string format
+				argument in the <paramref name="message" /> parameter.
+			</param>
+		</Log4>
+		<Log5>
+			<summary>
+				Adds a new <see cref="LogEntry" /> object to the <see cref="LogEntries" /> collection.
+			</summary>
+			<param name="type">
+				The <see cref="LogEntryType" /> enum value corresponding to the type of
+				<see cref="LogEntry" /> object being added to the <see cref="LogEntries" /> collection.
+			</param>
+			<param name="location">
+				A tuple that gives the name of the segment and the line number within the segment where
+				the log message was triggered.
+			</param>
+			<param name="message">
+				The log message that is being added to the <see cref="LogEntries" /> collection. <br />
+				This must be a <see langword="string" /> that contains one string format argument.
+			</param>
+			<param name="arg">
+				The <see langword="string" /> value to be substituted for the string format argument in
+				the <paramref name="message" /> parameter.
+			</param>
+		</Log5>
+		<Log6>
+			<summary>
+				Adds a new <see cref="LogEntry" /> object to the <see cref="LogEntries" /> collection.
+			</summary>
+			<param name="type">
+				The <see cref="LogEntryType" /> enum value corresponding to the type of
+				<see cref="LogEntry" /> object being added to the <see cref="LogEntries" /> collection.
+			</param>
+			<param name="location">
+				A tuple that gives the name of the segment and the line number within the segment where
+				the log message was triggered.
+			</param>
+			<param name="message">
+				The log message that is being added to the <see cref="LogEntries" /> collection. <br />
+				This must be a <see langword="string" /> that contains two string format arguments.
+			</param>
+			<param name="arg1">
+				The <see langword="string" /> value to be substituted for the first string format
+				argument in the <paramref name="message" /> parameter.
+			</param>
+			<param name="arg2">
+				The <see langword="string" /> value to be substituted for the second string format
+				argument in the <paramref name="message" /> parameter.
+			</param>
+		</Log6>
+	</members>
+	<members name="logentry">
+		<LogEntry>
+			<summary>
+				The <see cref="LogEntry" /> class represents a single log message entry.
+			</summary>
+		</LogEntry>
+		<Constructor>
+			<summary>
+				Creates a new instance of the <see cref="LogEntry" /> class.
+			</summary>
+			<param name="logEntryType">
+				A <see cref="LogEntryType" /> <see langword="enum" /> value corresponding to the type of
+				this <see cref="LogEntry" /> object.
+			</param>
+			<param name="segmentName">
+				The name of the segment where the log <paramref name="message" /> was triggered.
+			</param>
+			<param name="lineNumber">
+				The line number within the <paramref name="segmentName" /> where the log
+				<paramref name="message" /> was triggered.
+			</param>
+			<param name="message">
+				The log message.
+			</param>
+			<remarks>
+				The <paramref name="segmentName" /> will be empty if the log message doesn't pertain to a
+				specific segment.
+			</remarks>
+		</Constructor>
+		<LineNumber>
+			<summary>
+				Gets the line number within the segment where the log message was triggered.
+			</summary>
+		</LineNumber>
+		<LogEntryType>
+			<summary>
+				Gets the type of the log entry.
+			</summary>
+		</LogEntryType>
+		<Message>
+			<summary>
+				Gets the log message.
+			</summary>
+		</Message>
+		<SegmentName>
+			<summary>
+				Gets the name of the segment where the log message was triggered.
+			</summary>
+		</SegmentName>
+		<Equals>
+			<summary>
+				Determines whether the specified object is equal to this <see cref="LogEntry" /> object.
+			</summary>
+			<param name="obj">
+				The object to be compared to this <see cref="LogEntry" /> object.
+			</param>
+			<returns>
+				Returns <see langword="true" /> if the properties on the specified object have values
+				equal to the corresponding properties on this <see cref="LogEntry" /> object.
+			</returns>
+		</Equals>
+		<GetHashCode>
+			<summary>
+				Generates a hash code for this <see cref="LogEntry" /> object.
+			</summary>
+			<returns>
+				A 32-bit signed integer hash code.
+			</returns>
+		</GetHashCode>
+		<ToString>
+			<summary>
+				Generates a string representation of this <see cref="LogEntry" /> object.
+			</summary>
+			<returns>
+				A string that represents this <see cref="LogEntry" /> object.
+			</returns>
+		</ToString>
+	</members>
+	<members name="logentrytype">
+		<LogEntryType>
+			<summary>
+				This is an <see langword="enum" /> that represents the type of a <see cref="LogEntry" />
+				object.
+			</summary>
+		</LogEntryType>
+		<Setup>
+			<summary>
+				Log entry type assigned to log messages pertaining to setup operations.
+			</summary>
+		</Setup>
+		<Loading>
+			<summary>
+				Log entry type assigned to log messages pertaining to reading and loading text template
+				files.
+			</summary>
+		</Loading>
+		<Parsing>
+			<summary>
+				Log entry type assigned to log messages pertaining to parsing of text template files.
+			</summary>
+		</Parsing>
+		<Generating>
+			<summary>
+				Log entry type assigned to log messages pertaining to the generation of the text output
+				file.
+			</summary>
+		</Generating>
+		<Writing>
+			<summary>
+				Log entry type assigned to log messages pertaining to the writing of the text output
+				file.
+			</summary>
+		</Writing>
+		<Reset>
+			<summary>
+				Log entry type assigned to log messages pertaining to reset operations.
+			</summary>
+		</Reset>
+	</members>
+	<members name="messages">
+		<Messages>
+			<summary>
+				The <see cref="Messages" /> class defines all the message strings that are used for
+				exceptions, log entries, etc, in the <see cref="TextTemplateProcessor" /> class library.
+			</summary>
+		</Messages>
+	</members>
+	<members name="controlitem">
+		<ControlItem>
+			<summary>
+				The <see cref="ControlItem" /> class is used to control the formatting or a given segment in
+				a text template file.
+			</summary>
+		</ControlItem>
+		<Constructor>
+			<summary>
+				Creates a new instance of <see cref="ControlItem" /> with properties initialized to
+				default values.
+			</summary>
+		</Constructor>
+		<FirstTimeIndent>
+			<summary>
+				Gets an integer value indicating how many tab stops the first line of a segment should
+				be indented the first time the segment is processed.
+			</summary>
+		</FirstTimeIndent>
+		<IsFirstTime>
+			<summary>
+				Gets a boolean value indicating whether this is the first time the given segment is
+				being processed.
+			</summary>
+		</IsFirstTime>
+		<PadSegment>
+			<summary>
+				Gets the name of the segment that should be inserted ahead of the given segment on the
+				second and subsequent times the given segment is processed.
+			</summary>
+			<remarks>
+				This property will be <see langword="null" /> or empty if nothing should be inserted
+				ahead of the given segment.
+			</remarks>
+		</PadSegment>
+		<TabSize>
+			<summary>
+				Gets or sets the tab size for the segment.
+			</summary>
+		</TabSize>
+		<ShouldGeneratePadSegment>
+			<summary>
+				Returns a boolean value indicating whether or not the pad segment should be inserted the
+				next time the given segment is processed.
+			</summary>
+		</ShouldGeneratePadSegment>
+		<Equals>
+			<summary>
+				Determines whether or not the specified object is equal the current
+				<see cref="ControlItem" /> object.
+			</summary>
+			<param name="obj">
+				The object to be compared with the current <see cref="ControlItem" /> object.
+			</param>
+			<returns>
+				Returns <see langword="true" /> if the specified object is a <see cref="ControlItem" />
+				object and its property values match the property values on the current
+				<see cref="ControlItem" /> object.
+			</returns>
+		</Equals>
+		<GetHashCode>
+			<summary>
+				Generates a hash code for the current <see cref="ControlItem" /> object.
+			</summary>
+			<returns>
+				A 32-bit signed integer hash code value.
+			</returns>
+		</GetHashCode>
+		<ToString>
+			<summary>
+				Generates a <see langword="string" /> representation of the current
+				<see cref="ControlItem" /> object.
+			</summary>
+			<returns>
+				The string representation of the current <see cref="ControlItem" /> object.
+			</returns>
+		</ToString>
+	</members>
+	<members name="defaultsegmentnamegenerator">
+		<DefaultSegmentNameGenerator>
+			<summary>
+				The <see cref="DefaultSegmentNameGenerator" /> class is a static class used for generating
+				unique default segment names for segments that either don't specify a name or that have a
+				name that matches a previous segment in the same text template file.
+			</summary>
+		</DefaultSegmentNameGenerator>
+		<Next>
+			<summary>
+				Gets the next default segment name.
+			</summary>
+			<remarks>
+				The default name is comprised of the string "DefaultSegment" with an auto-incremented
+				integer appended to the end. <br /> The first default name would be "DefaultSegment1",
+				the second "DefaultSegment2", and so on.
+			</remarks>
+		</Next>
+		<Reset>
+			<summary>
+				Resets the default segment name counter back to zero.
+			</summary>
+		</Reset>
+	</members>
+	<members name="indentprocessor">
+		<IndentProcessor>
+			<summary>
+				The <see cref="IndentProcessor" /> class is a static class that keeps track of the current
+				indent value for lines being written to the text output file.
+			</summary>
+		</IndentProcessor>
+		<CurrentIndent>
+			<summary>
+				Gets an integer value representing the current indent amount.
+			</summary>
+			<remarks>
+				The indent amount gives the number of spaces that will be inserted on the left end of
+				the current text line before it is written to the output file.
+			</remarks>
+		</CurrentIndent>
+		<TabSize>
+			<summary>
+				Gets an integer value representing the current tab size.
+			</summary>
+			<remarks>
+				The tab size gives the number of spaces the current text line will be shifted to the
+				right (forward tab) or to the left (back tab).
+			</remarks>
+		</TabSize>
+		<GetFirstTimeIndent>
+			<summary>
+				Determines how much to indent the first line of a text segment the first time the
+				segment is processed.
+			</summary>
+			<param name="firstTimeIndent">
+				A one-time offset amount to be applied to the current indent value the first time the
+				segment is processed.
+			</param>
+			<param name="textItem">
+				A <see cref="TextItem" /> object corresponding to the current line being processed in the
+				current segment of the text template file. (This should be the first line of the
+				segment.)
+			</param>
+			<returns>
+				An integer value representing the number of spaces to indent the current text line.
+			</returns>
+			<remarks>
+				If the calculated indent value is negative, it will be set to zero since negative indent
+				amounts aren't supported.
+			</remarks>
+		</GetFirstTimeIndent>
+		<GetIndent>
+			<summary>
+				Determines how much to indent the current line being processed in the current segment of
+				the text template file.
+			</summary>
+			<param name="textItem">
+				A <see cref="TextItem" /> object corresponding to the current line being processed in the
+				current segment of the text template file.
+			</param>
+			<returns>
+				An integer value representing the number of spaces to indent the current text line.
+			</returns>
+			<remarks>
+				If the calculated indent value is negative, it will be set to zero since negative indent
+				amounts aren't supported.
+			</remarks>
+		</GetIndent>
+		<IsValidIndentValue>
+			<summary>
+				Determines if the specified <see langword="string" /> value represents a valid integer
+				value for the indent value.
+			</summary>
+			<param name="stringValue">
+				A <see langword="string" /> representation of an integer value.
+			</param>
+			<param name="indent">
+				This will be set to the integer value corresponding to <paramref name="stringValue" />,
+				or zero if <paramref name="stringValue" /> doesn't represent a valid integer value or it
+				is outside the allowed range.
+			</param>
+			<returns>
+				Returns <see langword="true" /> if <paramref name="stringValue" /> represents a valid
+				integer value and it is within the valid range of values.
+			</returns>
+			<remarks>
+				The indent value is constrained to be between -9 and 9, inclusive. The value is
+				considered to be invalid if it is outside this range.
+			</remarks>
+		</IsValidIndentValue>
+		<IsValidTabSizeValue>
+			<summary>
+				Determines if the specified <see langword="string" /> value represents a valid integer
+				value for the tab size.
+			</summary>
+			<param name="stringValue">
+				A <see langword="string" /> representation of an integer value.
+			</param>
+			<param name="tabSize">
+				This will be set to the integer value corresponding to <paramref name="stringValue" />,
+				or zero if <paramref name="stringValue" /> doesn't represent a valid integer value or it
+				is outside the allowed range.
+			</param>
+			<returns>
+				Returns <see langword="true" /> if <paramref name="stringValue" /> represents a valid
+				integer value and it is within the valid range of values.
+			</returns>
+			<remarks>
+				The tab size value is constrained to be between 1 and 9, inclusive. The value is
+				considered to be invalid if it is outside this range.
+			</remarks>
+		</IsValidTabSizeValue>
+		<Reset>
+			<summary>
+				Resets the current indent value to zero.
+			</summary>
+		</Reset>
+		<RestoreCurrentIndentLocation>
+			<summary>
+				Checks a flag to see if the current indent has been saved, and if it has then the
+				current indent, current segment, and line number are restored from the saved values and
+				the flag is cleared to indicate the current values are no longer saved.
+			</summary>
+		</RestoreCurrentIndentLocation>
+		<SaveCurrentIndentLocation>
+			<summary>
+				Save the current indent, current segment, and line number, and set a flag to indicate
+				that the current indent has been saved.
+			</summary>
+		</SaveCurrentIndentLocation>
+		<SetTabSize>
+			<summary>
+				Sets the tab size to the specified amount.
+			</summary>
+			<param name="tabSize">
+				An integer value representing the desired tab size.
+			</param>
+			<remarks>
+				The tab size is constrained to the range 1 to 9, inclusive. If
+				<paramref name="tabSize" /> is less than 1, then the tab size will be set to 1. If
+				<paramref name="tabSize" /> is greater than 9, then the tab size will be set to 9.
+			</remarks>
+		</SetTabSize>
+	</members>
+	<members name="locater">
+		<Locater>
+			<summary>
+				The <see cref="Locater" /> class is a static class used for keeping track of the current
+				location in the text template file as it is processed.
+			</summary>
+		</Locater>
+		<Constructor>
+			<summary>
+				The static constructor initializes the <see cref="Locater" /> class with an empty segment
+				name and line number 0.
+			</summary>
+		</Constructor>
+		<CurrentSegment>
+			<summary>
+				Gets the name of the current segment being processed in the text template file.
+			</summary>
+		</CurrentSegment>
+		<IsMissingSegmentHeader>
+			<summary>
+				Gets a boolean value that's <see langword="true" /> when the current segment is
+				<see langword="null" />, empty, or whitespace.
+			</summary>
+		</IsMissingSegmentHeader>
+		<IsValidSegmentHeader>
+			<summary>
+				Gets a boolean value that's <see langword="true" /> when the current segment contains a
+				valid segment name.
+			</summary>
+		</IsValidSegmentHeader>
+		<LineNumber>
+			<summary>
+				Gets the current line number of the segment that is being processed in the text template
+				file.
+			</summary>
+		</LineNumber>
+		<Location>
+			<summary>
+				Returns a tuple containing the current segment name and the line number within that
+				segment.
+			</summary>
+		</Location>
+		<Reset>
+			<summary>
+				Resets the current segment name to an empty string and the line number to 0.
+			</summary>
+		</Reset>
+		<ToString>
+			<summary>
+				Generates a string representation of the <see cref="Locater" /> class.
+			</summary>
+			<returns>
+				A <see langword="string" /> containing the current segment name and line number.
+			</returns>
+		</ToString>
+	</members>
+	<members name="namevalidater">
+		<NameValidater>
+			<summary>
+				The <see cref="NameValidater" /> class is a static class used for validating segment names
+				and token names in a text template file.
+			</summary>
+		</NameValidater>
+		<IsValidName>
+			<summary>
+				Validates whether the specified identifier is a valid segment name or token name.
+			</summary>
+			<param name="identifier">
+				A <see langword="string" /> value that is either a segment name or token name.
+			</param>
+			<returns>
+				Returns <see langword="true" /> if the specified identifier is a valid segment name or
+				token name.
+			</returns>
+		</IsValidName>
+	</members>
+	<members name="segmentheaderparser">
+		<SegmentHeaderParser>
+			<summary>
+				The <see cref="SegmentHeaderParser" /> class is a static class used for parsing the header of
+				a segment in a text template file.
+			</summary>
+		</SegmentHeaderParser>
+		<ParseSegmentHeader>
+			<summary>
+				Retrieves the segment name from the segment header along with any optional parameters
+				that may be present.
+			</summary>
+			<param name="textLine">
+				A text line containing a segment header from the text template file.
+			</param>
+			<returns>
+				A <see cref="ControlItem" /> object containing any optional parameter values found on the
+				segment header.
+			</returns>
+			<remarks>
+				A default segment name will be generated for the segment if the name was omitted or was
+				invalid.
+			</remarks>
+		</ParseSegmentHeader>
+	</members>
+	<members name="templateloader">
+		<TemplateLoader>
+			<summary>
+				The <see cref="TemplateLoader" /> class takes an in-memory copy of a text template file,
+				parses it, and then sets up the necessary control structures for processing the template.
+			</summary>
+		</TemplateLoader>
+		<Constructor>
+			<summary>
+				Creates a new instance of the <see cref="TemplateLoader" /> class.
+			</summary>
+			<param name="templateProcessor">
+				A reference to the <see cref="TextTemplateProcessor" /> class object where this
+				<see cref="TemplateLoader" /> object is used.
+			</param>
+		</Constructor>
+		<LoadTemplate>
+			<summary>
+				Parses an in-memory copy of a text template file and sets up the control structures
+				needed by the <see cref="TextTemplateProcessor" /> class to process the template.
+			</summary>
+			<param name="templateLines">
+				A collection of <see langword="string" /> objects representing the lines of a text
+				template file.
+			</param>
+		</LoadTemplate>
+	</members>
+	<members name="textitem">
+		<TextItem>
+			<summary>
+				The <see cref="TextItem" /> record represents a single line of text from a text template
+				file. <br /> In addition to the text, the record contains information used for controlling
+				the indentation of the text line when written to the output file.
+			</summary>
+			<param name="Indent">
+				An integer value representing the number of forward tabs (positive values) or back tabs
+				(negative values) to be applied to this text line when writing it to the output file.
+			</param>
+			<param name="IsRelative">
+				If <see langword="true" />, the specified <paramref name="Indent" /> value will be relative to
+				the current indent carried forward from the previous text line. <br /> If
+				<see langword="false" />, the specified <paramref name="Indent" /> value will be absolute from
+				the beginning of the line written to the output file.
+			</param>
+			<param name="IsOneTime">
+				If <see langword="true" />, the specified <paramref name="Indent" /> value only applies to the
+				current text line and the current indent value carried forward from the previous text line
+				is passed on unchanged to the next text line. <br /> If <see langword="false" />, the
+				specified <paramref name="Indent" /> value adjusts the current indent value carried forward
+				from the previous text line before being passed on to the next text line.
+			</param>
+			<param name="Text">
+				This is the text from a single line of the text template file, including any optional
+				placeholder tokens.
+			</param>
+		</TextItem>
+	</members>
+	<members name="textlineparser">
+		<TextLineParser>
+			<summary>
+				The <see cref="TextLineParser" /> class is a static class used for parsing text lines in a
+				text template file.
+			</summary>
+		</TextLineParser>
+		<IsCommentLine>
+			<summary>
+				Determines whether or not the specified text line is a comment line.
+			</summary>
+			<param name="text">
+				A line of text from a text template file.
+			</param>
+			<returns>
+				Returns <see langword="true" /> if the text line is a comment line.
+			</returns>
+		</IsCommentLine>
+		<IsSegmentHeader>
+			<summary>
+				Determines whether or not the specified text line is a segment header line.
+			</summary>
+			<param name="text">
+				A line of text from a text template file.
+			</param>
+			<returns>
+				Returns <see langword="true" /> if the text line is a template segment header line.
+			</returns>
+		</IsSegmentHeader>
+		<IsValidPrefix>
+			<summary>
+				Determines whether or not the specified text line starts with a valid control prefix.
+			</summary>
+			<param name="textLine">
+				A line of text from a text template file.
+			</param>
+			<returns>
+				Returns <see langword="true" /> if the text line starts with a valid control prefix.
+			</returns>
+		</IsValidPrefix>
+		<ParseTextLine>
+			<summary>
+				Parses a text line from a text template file and extracts the indent control information
+				and any tokens that are embedded in the text.
+			</summary>
+			<param name="templateLine">
+				A line of text from a text template file.
+			</param>
+			<returns>
+				A <see cref="TextItem" /> object containing the indent control information and tokenized
+				text that was extracted from the <paramref name="templateLine" />.
+			</returns>
+			<remarks>
+				This method assumes that the <paramref name="templateLine" /> has a valid control prefix
+				and is not a comment line or segment header line.
+			</remarks>
+		</ParseTextLine>
+	</members>
+	<members name="tokenprocessor">
+		<TokenProcessor>
+			<summary>
+				The <see cref="TokenProcessor" /> class is a static class used for managing the tokens
+				contained in a text template file.
+			</summary>
+		</TokenProcessor>
+		<_tokenDictionary>
+			<summary>
+				A dictionary of token name/value pairs.
+			</summary>
+		</_tokenDictionary>
+		<ClearTokens>
+			<summary>
+				Clears all tokens from the token dictionary.
+			</summary>
+		</ClearTokens>
+		<ExtractTokens>
+			<summary>
+				Extracts all tokens from the specified text line and saves them to the token dictionary.
+			</summary>
+			<param name="text">
+				A line of text from a text template file.
+			</param>
+		</ExtractTokens>
+		<LoadTokenValues>
+			<summary>
+				Updates the tokens in the token dictionary with the corresponding values found in the
+				given dictionary.
+			</summary>
+			<param name="tokenDictionary">
+				A dictionary of token name/value pairs used for updating the token dictionary.
+			</param>
+		</LoadTokenValues>
+		<ReplaceTokens>
+			<summary>
+				Replace all tokens in the specified text line with the corresponding values from the
+				token dictionary.
+			</summary>
+			<param name="text">A text line from a text template file.</param>
+			<returns>
+				A <see langword="string" /> copy of <paramref name="text" /> having all tokens replaced
+				with corresponding values.
+			</returns>
+		</ReplaceTokens>
+		<ResetTokens>
+			<summary>
+				Reset the values of all tokens in the token dictionary to empty strings.
+			</summary>
+		</ResetTokens>
+	</members>
+	<members name="texttemplateprocessor">
+		<TextTemplateProcessor>
+			<summary>
+				The <see cref="TextTemplateProcessor" /> class is used for generating text output files based
+				on text template files containing control information and token placeholders.
+			</summary>
+		</TextTemplateProcessor>
+		<Constructor1>
+			<summary>
+				Creates an instance of the <see cref="TextTemplateProcessor" /> class using the specified
+				template file path.
+			</summary>
+			<param name="filePath">
+				The file path of a text template file.
+			</param>
+		</Constructor1>
+		<Constructor2>
+			<summary>
+				Creates an instance of the <see cref="TextTemplateProcessor" /> class using the specified
+				<see cref="ITextReader" /> and <see cref="ITextWriter" /> objects.
+			</summary>
+			<param name="templateReader">
+				An <see cref="ITextReader" /> object used for initializing the
+				<see cref="TextTemplateProcessor" /> class object.
+			</param>
+			<param name="templateWriter">
+				An <see cref="ITextWriter" /> object used for initializing the
+				<see cref="TextTemplateProcessor" /> class object.
+			</param>
+			<remarks>
+				Note that this is an internal constructor intended primarily to support unit testing.
+			</remarks>
+		</Constructor2>
+		<CurrentSegment>
+			<summary>
+				Gets the name of the current segment being parsed or processed in the text template file.
+			</summary>
+		</CurrentSegment>
+		<LineNumber>
+			<summary>
+				Gets the line number representing the current location in either the text template file
+				being parsed or in the current segment being processed.
+			</summary>
+		</LineNumber>
+		<CurrentIndent>
+			<summary>
+				Gets the current indent amount. This equates to the number of spaces that will be added
+				to the beginning of a text line before being written to the text output file.
+			</summary>
+			<remarks>
+				This value will be some multiple of the <see cref="TabSize" /> value.
+			</remarks>
+		</CurrentIndent>
+		<GeneratedText>
+			<summary>
+				Gets an <see cref="IEnumerable{T}" /> collection of <see langword="string" /> objects that
+				represent the text lines that have been generated from the text template file.
+			</summary>
+		</GeneratedText>
+		<IsOutputFileWritten>
+			<summary>
+				Gets a boolean value that returns <see langword="true" /> if the generated text lines
+				have been written to the output file.
+			</summary>
+		</IsOutputFileWritten>
+		<IsTemplateLoaded>
+			<summary>
+				Gets a boolean value that returns <see langword="true" /> if a text template file has
+				been loaded.
+			</summary>
+		</IsTemplateLoaded>
+		<TabSize>
+			<summary>
+				Gets the tab size value which equates to the number of spaces a text line will be
+				shifted left or right as the <see cref="CurrentIndent" /> value is increased or
+				decreased.
+			</summary>
+		</TabSize>
+		<TemplateFilePath>
+			<summary>
+				Gets the full file path to the text template file.
+			</summary>
+		</TemplateFilePath>
+		<ControlDictionary>
+			<summary>
+				Gets a reference to the control dictionary which controls the processing of segments in
+				the text template file.
+			</summary>
+		</ControlDictionary>
+		<SegmentDictionary>
+			<summary>
+				Gets a reference to the segment dictionary which contains the text lines from the text
+				template file along with information for controlling the indentation.
+			</summary>
+		</SegmentDictionary>
+		<GenerateSegment>
+			<summary>
+				Processes the specified segment from the text template file and adds the generated text
+				to the <see cref="GeneratedText" /> buffer.
+			</summary>
+			<param name="segmentName">
+				The name of the segment to be processed.
+			</param>
+			<param name="tokenDictionary">
+				An optional dictionary of token name/value pairs used to provide substitution values for
+				the tokens contained within the specified segment.
+			</param>
+		</GenerateSegment>
+		<LoadTemplate1>
+			<summary>
+				Loads the text template file pointed to by <see cref="TemplateFilePath" /> into memory.
+			</summary>
+		</LoadTemplate1>
+		<LoadTemplate2>
+			<summary>
+				Sets the text template file path to the path specified by <paramref name="filePath" />
+				and then loads the text template file into memory.
+			</summary>
+			<param name="filePath">
+				The file path to a text template file.
+			</param>
+		</LoadTemplate2>
+		<ResetAll>
+			<summary>
+				Resets the <see cref="TextTemplateProcessor" /> environment to its initial state.
+			</summary>
+			<remarks>
+				This method will clear the contents of the control dictionary, segment dictionary, and
+				token dictionary. It will also reset the current indent value and generated text buffer.
+			</remarks>
+		</ResetAll>
+		<ResetGeneratedText>
+			<summary>
+				Resets the current indent value to 0 and clears the generated text buffer.
+			</summary>
+		</ResetGeneratedText>
+		<ResetSegment>
+			<summary>
+				Resets the <see cref="ControlItem.IsFirstTime" /> flag for the specified segment to
+				<see langword="true" /> and resets the current line number to 0.
+			</summary>
+			<param name="segmentName">
+				The name of a segment in the text template file.
+			</param>
+			<remarks>
+				An error message will be written to the console log if the specified segment name is
+				<see langword="null" />, empty, or doesn't exist in the text template file.
+			</remarks>
+		</ResetSegment>
+		<SetTabSize>
+			<summary>
+				Sets the current tab size.
+			</summary>
+			<param name="tabSize">
+				The desired tab size.
+			</param>
+			<remarks>
+				The tab size is constrained to be within the range of 1 to 9 spaces.
+			</remarks>
+		</SetTabSize>
+		<WriteGeneratedTextToFile>
+			<summary>
+				Writes the contents of the generated text buffer to the specified output file path.
+			</summary>
+			<param name="filePath">
+				The file path where the generated text buffer is to be written.
+			</param>
+			<param name="resetGeneratedText">
+				A boolean flag indicating whether or not the generated text buffer should be reset after
+				the output file is successfully created. <br /> The default is <see langword="true" /> -
+				the generated text buffer will be reset.
+			</param>
+		</WriteGeneratedTextToFile>
+		<ITextTemplateProcessor>
+			<summary>
+				An interface that provides functionality for generating text files from text template files.
+			</summary>
+		</ITextTemplateProcessor>
+	</members>
+</docs>

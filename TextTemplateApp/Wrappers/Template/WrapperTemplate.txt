@@ -1,0 +1,93 @@
+﻿/// ===========================================================================
+/// === This is a sample text template file that can be used for generating
+/// === model wrapper classes based on model classes.
+/// ===========================================================================
+### BlankLine
+     
+### Namespace
+    namespace <#=WrapperNamespace#>
+    {
+@+1 using ModelWrapperBase;
+/// ===========================================================================
+/// === The System and System.Linq namespaces are required if the model
+/// === contains any collection properties.
+/// ===========================================================================
+### CollectionUsings
+    using System;
+    using System.Linq;
+/// ===========================================================================
+/// === The System namespace is required if the model contains any complex
+/// === properties.
+/// ===========================================================================
+### ComplexUsings
+    using System;
+/// ===========================================================================
+/// === This is the start of the model wrapper class definition including its
+/// === constructor.
+/// ===========================================================================
+### ClassStart
+    using <#=ModelNamespace#>;
+     
+    public partial class <#=ClassName#>Wrapper : ModelWrapper<<#=ClassName#>>
+    {
+@+1 public <#=ClassName#>Wrapper(<#=ClassName#> model) : base(model)
+    {
+    }
+/// ===========================================================================
+/// === Template for a simple property.
+/// ===========================================================================
+### SimpleProperty
+     
+    public <#=PropertyType#> <#=PropertyName#>
+    {
+@+1 get => GetValue<<#=PropertyType#>>();
+    set => SetValue(value);
+@-1 }
+     
+    public bool <#=PropertyName#>IsChanged => GetIsChanged(nameof(<#=PropertyName#>));
+     
+    public <#=PropertyType#> <#=PropertyName#>OriginalValue => GetOriginalValue<<#=PropertyType#>>(nameof(<#=PropertyName#>));
+/// ===========================================================================
+/// === Template for a complex property.
+/// ===========================================================================
+### ComplexProperty
+     
+    public <#=PropertyType#>Wrapper <#=PropertyName#> { get; private set; }
+/// ===========================================================================
+/// === Template for a collection property.
+/// ===========================================================================
+### CollectionProperty
+     
+    public ChangeTrackingCollection<<#=ItemType#>Wrapper> <#=PropertyName#> { get; private set; }
+/// ===========================================================================
+/// === Complex property initialization.
+/// ===========================================================================
+### ComplexInitStart
+     
+    protected override void InitializeComplexProperties()
+    {
+### ComplexInitItem FTI=1 PAD=BlankLine
+    if (Model.<#=PropertyName#> is null)
+    {
+@+1 throw new ArgumentException("<#=PropertyName#> must not be null.");
+@-1 }
+     
+    <#=PropertyName#> = new <#=PropertyType#>Wrapper(Model.<#=PropertyName#>);
+    RegisterComplex(<#=PropertyName#>);
+### ClosingBrace
+@-1 }
+/// ===========================================================================
+/// === Collection property initialization.
+/// ===========================================================================
+### CollectionInitStart
+     
+    protected override void InitializeCollectionProperties()
+    {
+### CollectionInitItem FTI=1 PAD=BlankLine
+    if (Model.<#=PropertyName#> is null)
+    {
+@+1 throw new ArgumentException("<#=PropertyName#> must not be null.");
+@-1 }
+     
+    <#=PropertyName#> = new ChangeTrackingCollection<<#=ItemType#>Wrapper>(Model.<#=PropertyName#>.Select(e => new <#=ItemType#>Wrapper(e)));
+    RegisterCollection(<#=PropertyName#>, Model.<#=PropertyName#>);

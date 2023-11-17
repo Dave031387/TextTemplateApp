@@ -1,0 +1,446 @@
+﻿<docs>
+	<members name="changetrackingcollection">
+		<ChangeTrackingCollection>
+			<summary>
+				This class implements an observable collection of objects that implement the
+				<see cref="IValidatingTrackingObject" /> interface.
+			</summary>
+			<remarks>
+				This class derives from <see cref="ObservableCollection{T}" /> and implements the
+				<see cref="IValidatingTrackingObject" /> interface. It provides for property change notification
+				and revertible change tracking of the collection.
+			</remarks>
+			<typeparam name="T">
+				A class type that implements the <see cref="IValidatingTrackingObject" /> interface.
+			</typeparam>
+		</ChangeTrackingCollection>
+		<Constructor>
+			<summary>
+				Generates an instance of the <see cref="ChangeTrackingCollection{T}" /> class.
+				<para>
+					This constructor takes an <see cref="IEnumerable{T}" /> collection of objects as an argument.
+					This collection is used to initialize the <see cref="ChangeTrackingCollection{T}" />.
+				</para>
+			</summary>
+			<param name="items">
+				An <see cref="IEnumerable{T}" /> collection of objects that implement the
+				<see cref="IValidatingTrackingObject" /> interface.
+			</param>
+		</Constructor>
+		<AddedItems>
+			<summary>
+				Gets a <see cref="ReadOnlyObservableCollection{T}" /> of items that have been added to
+				the <see cref="ChangeTrackingCollection{T}" /> since the last execution of
+				<see cref="AcceptChanges">AcceptChanges()</see> or
+				<see cref="RejectChanges">RejectChanges()</see>.
+			</summary>
+		</AddedItems>
+		<IsChanged>
+			<summary>
+				Gets the collection's changed status. Returns <see langword="true" /> if there are any
+				added, modified, or removed items that haven't yet been accepted or rejected.
+			</summary>
+		</IsChanged>
+		<IsValid>
+			<summary>
+				Gets the validity of the collection. Returns <see langword="true" /> only if all items in
+				the collection are valid.
+			</summary>
+		</IsValid>
+		<ModifiedItems>
+			<summary>
+				Gets a <see cref="ReadOnlyObservableCollection{T}" /> of items that have been modified in
+				the <see cref="ChangeTrackingCollection{T}" /> since the last execution of
+				<see cref="AcceptChanges">AcceptChanges()</see> or
+				<see cref="RejectChanges">RejectChanges()</see>.
+			</summary>
+		</ModifiedItems>
+		<RemovedItems>
+			<summary>
+				Gets a <see cref="ReadOnlyObservableCollection{T}" /> of items that have been removed
+				from the <see cref="ChangeTrackingCollection{T}" /> since the last execution of
+				<see cref="AcceptChanges">AcceptChanges</see> or
+				<see cref="RejectChanges">RejectChanges()</see>.
+			</summary>
+		</RemovedItems>
+		<AcceptChanges>
+			<summary>
+				Accepts all pending changes to items in the collection.
+			</summary>
+			<remarks>
+				All added, modified, and removed items are finalized, and the change tracking lists are cleared.
+				<para>
+					If there are any validation errors, or if there isn't at least one added,
+					modified, or removed item, then this method will return without doing anything.
+				</para>
+			</remarks>
+		</AcceptChanges>
+		<RejectChanges>
+			<summary>
+				Rejects all pending changes to items in the collection.
+			</summary>
+			<remarks>
+				Removed items are added back in to the collection, added items are removed, and modified items are
+				reverted back to their original state. The change tracking lists are also cleared.
+				<para>
+					If there are no added, modified, or removed items then this method will return without
+					doing anything.
+				</para>
+			</remarks>
+		</RejectChanges>
+		<OnCollectionChanged>
+			<summary>
+				<inheritdoc />
+			</summary>
+			<param name="e">
+				<inheritdoc />
+			</param>
+			<remarks>
+				The change tracking collections are updated as needed and the PropertyChanged event is
+				raised for the <see cref="IsChanged">IsChanged</see> and
+				<see cref="IsValid">IsValid</see> properties.
+			</remarks>
+		</OnCollectionChanged>
+	</members>
+	<members name="validatingtrackingobject">
+		<IValidatingTrackingObject>
+			<summary>
+				An interface that implements property change notification and revertible change tracking.
+			</summary>
+			<remarks>
+				This interface incorporates both the <see cref="IRevertibleChangeTracking" /> and the
+				<see cref="INotifyPropertyChanged" /> interfaces.
+			</remarks>
+		</IValidatingTrackingObject>
+		<IsValid>
+			<summary>
+				Gets the validity of the object. Returns <see langword="true" /> if there are no errors.
+			</summary>
+		</IsValid>
+	</members>
+	<members name="modelwrapper">
+		<ModelWrapper>
+			<summary>
+				An abstract wrapper class for model classes that provides for property change notification,
+				data validation, error notification, and revertible change tracking.
+			</summary>
+			<remarks>
+				This class derives from <see cref="NotifyDataErrorInfoBase" /> and implements the
+				<see cref="IValidatingTrackingObject" /> and <see cref="IValidatableObject" /> interfaces.
+			</remarks>
+			<typeparam name="T">
+				The class type that is being wrapped (usually a model class).
+			</typeparam>
+		</ModelWrapper>
+		<Constructor>
+			<summary>
+				Creates an instance of the <see cref="ModelWrapper{T}" /> class for the given model
+				class.
+			</summary>
+			<param name="model">
+				The class being wrapped by the <see cref="ModelWrapper{T}" /> class (usually a model
+				class).
+			</param>
+		</Constructor>
+		<IsChanged>
+			<summary>
+				Gets the <c>IsChanged</c> state of the model class.
+			</summary>
+			<remarks>
+				Returns <see langword="true" /> if any property of the model class has been modified in
+				any way. Otherwise it returns <see langword="false" />.
+			</remarks>
+		</IsChanged>
+		<IsValid>
+			<summary>
+				Gets the <c>IsValid</c> state of the model class.
+			</summary>
+			<remarks>
+				Returns <see langword="true" /> if no property of the model class has any validation
+				errors.
+				<para>
+					For collection properties, all items in the collection must be valid before the
+					collection property is considered to be valid.
+				</para>
+				<para>
+					For complex properties, all properties of the object that is returned by the complex
+					property must be valid.
+				</para>
+			</remarks>
+		</IsValid>
+		<Model>
+			<summary>
+				Gets the model class instance that is wrapped by the <see cref="ModelWrapper{T}" />.
+			</summary>
+		</Model>
+		<AcceptChanges>
+			<summary>
+				Accepts all pending changes to the model class instance.
+			</summary>
+			<remarks>
+				Changes will be accepted only if one or more properties have been modified and all
+				properties are valid. Otherwise, the method returns without doing anything.
+				<para>
+					The <see langword="PropertyChanged" /> event is raised for all properties in the model
+					class instance after the changes have been accepted.
+				</para>
+			</remarks>
+		</AcceptChanges>
+		<RejectChanges>
+			<summary>
+				Rejects all pending changes to the model class object.
+			</summary>
+			<remarks>
+				This method returns without doing anything if there are no pending changes to the model
+				class object.
+				<para>
+					The <see langword="PropertyChanged" /> event is raised for all properties in the model
+					class instance after the changes have been rejected.
+				</para>
+			</remarks>
+		</RejectChanges>
+		<Validate1>
+			<summary>
+				Determines whether the wrapped model class object is valid.
+			</summary>
+			<remarks>
+				This method must be overridden in all classes that derive from the
+				<see cref="ModelWrapper{T}" /> class. The <see cref="ModelWrapper{T}" /> class doesn't
+				perform any validation of its own.
+			</remarks>
+			<param name="validationContext">
+				Describes the context in which the validation check is performed.
+			</param>
+			<returns>
+				Returns a collection of <see cref="ValidationResult" /> objects representing the
+				validation errors that were found.
+			</returns>
+		</Validate1>
+		<GetIsChanged>
+			<summary>
+				Gets the <c>IsChanged</c> state for the given property of the model class.
+			</summary>
+			<param name="propertyName">
+				The name of the property to query.
+			</param>
+			<returns>
+				Returns <see langword="true" /> if the property has been changed since the last
+				successful <see langword="AcceptChanges" /> or <see langword="RejectChanges" /> method
+				call.
+			</returns>
+		</GetIsChanged>
+		<GetOriginalValue>
+			<summary>
+				Gets the original value for the given property.
+			</summary>
+			<remarks>
+				If the property was previously changed, and the changes were accepted (see
+				<see cref="AcceptChanges" />) then the changed value becomes the new original value.
+			</remarks>
+			<typeparam name="TValue">
+				The return type of the given property.
+			</typeparam>
+			<param name="propertyName">
+				The name of the property to be queried.
+			</param>
+			<returns>
+				Returns the original value of the given property.
+			</returns>
+		</GetOriginalValue>
+		<GetValue>
+			<summary>
+				Gets the current value of the given property.
+			</summary>
+			<remarks>
+				If the property value has been changed and not yet accepted, then the current value is
+				the changed value. If the changes are later rejected, then the current value will revert
+				to its original value.
+			</remarks>
+			<typeparam name="TValue">
+				The return type of the given property.
+			</typeparam>
+			<param name="propertyName">
+				The name of the property to query.
+			</param>
+			<returns>
+				Returns the current value of the given property.
+			</returns>
+		</GetValue>
+		<InitializeCollectionProperties>
+			<summary>
+				Initializes the collection properties in the wrapper for the given model class.
+			</summary>
+			<remarks>
+				This method must be overridden in derived classes that have collection properties. The
+				method override must populate each <see cref="ChangeTrackingCollection{T}" /> of the
+				wrapper class with wrapped versions of all items in the corresponding collection
+				property of the model class that is being wrapped.
+			</remarks>
+		</InitializeCollectionProperties>
+		<InitializeComplexProperties>
+			<summary>
+				Initializes the complex properties in the wrapper for the given model class.
+			</summary>
+			<remarks>
+				This method must be overridden in derived classes that have complex properties. The
+				method override must initialize each complex property of the wrapper class with a
+				wrapped version of the object returned from the corresponding complex property in the
+				model class that is being wrapped.
+			</remarks>
+		</InitializeComplexProperties>
+		<RegisterCollection>
+			<summary>
+				Hooks up the <see langword="CollectionChanged" /> event handler for the given collection
+				property in the model wrapper class and then adds that collection to the collection of
+				<see cref="IValidatingTrackingObject" /> objects.
+			</summary>
+			<typeparam name="TWrapper">
+				The type name of the objects contained in the collection property of the model wrapper
+				class.
+			</typeparam>
+			<typeparam name="TModel">
+				The type name of the objects contained in the collection property of the model class.
+			</typeparam>
+			<param name="wrapperCollection">
+				A wrapped collection property in the model wrapper class corresponding to
+				<paramref name="modelCollection" /> in the model class.
+			</param>
+			<param name="modelCollection">
+				A collection property in the model class corresponding to
+				<paramref name="wrapperCollection" /> in the model wrapper class. The collection
+				must derive from <see cref="IList{T}" />.
+			</param>
+		</RegisterCollection>
+		<RegisterComplex>
+			<summary>
+				Adds the object returned from a complex property in the model wrapper class to the
+				collection of <see cref="IValidatingTrackingObject" /> objects.
+			</summary>
+			<typeparam name="TModel">
+				The type name of the object returned from the given complex property.
+			</typeparam>
+			<param name="wrapper">
+				A complex property of the model wrapper class.
+			</param>
+		</RegisterComplex>
+		<SetValue>
+			<summary>
+				Sets the value of the given property on the model class and raises the
+				<see langword="PropertyChanged" /> event.
+			</summary>
+			<typeparam name="TValue">
+				The type name of the object returned by the given property.
+			</typeparam>
+			<param name="newValue">
+				The new property value to be set.
+			</param>
+			<param name="propertyName">
+				The name of the property to be set.
+			</param>
+		</SetValue>
+		<Validate2>
+			<summary>
+				Clears all previous validation errors and then validates all properties of the model
+				class.
+			</summary>
+			<remarks>
+				This method makes a call to the <see cref="Validate(ValidationContext)" /> method which
+				must be overridden in the derived model wrapper class. The call is made via a call to
+				<see langword="Validator.TryValidateObject(...)" />.
+				<para>
+					The <see langword="ErrorsChanged" /> event is raised for each property in the model
+					class.
+				</para>
+			</remarks>
+		</Validate2>
+	</members>
+	<members name="notifydataerrorinfobase">
+		<NotifyDataErrorInfoBase>
+			<summary>
+				An abstract base class that implements property change notification and data error
+				notification.
+			</summary>
+			<remarks>
+				This class derives from the <see cref="Observable" /> class and implements the
+				<see cref="INotifyDataErrorInfo" /> interface.
+			</remarks>
+		</NotifyDataErrorInfoBase>
+		<Errors>
+			<summary>
+				A <see langword="Dictionary" /> of data validation errors where the dictionary
+				key is the name of a property and the dictionary value is a list of errors on
+				that property.
+			</summary>
+		</Errors>
+		<Constructor>
+			<summary>
+				Constructs an instance of the <see cref="NotifyDataErrorInfoBase" /> class.
+			</summary>
+		</Constructor>
+		<ErrorsChanged>
+			<summary>
+				An event that gets raised when the validation errors have changed for a property or for
+				the entire object.
+			</summary>
+		</ErrorsChanged>
+		<HasErrors>
+			<summary>
+				Gets the <c>HasErrors</c> state of the object.
+			</summary>
+			<remarks>
+				Returns <see langword="true" /> if there are currently any validation errors on the
+				object or on one or more of its properties.
+			</remarks>
+		</HasErrors>
+		<GetErrors>
+			<summary>
+				Gets a collection of validation errors for the given property.
+			</summary>
+			<param name="propertyName">
+				The name of the property for which we want to retrieve the errors.
+			</param>
+			<returns>
+				Returns an <see cref="IEnumerable" /> of <see langword="string" /> containing validation
+				errors. An empty list will be returned if there are no errors for the property.
+			</returns>
+		</GetErrors>
+		<ClearErrors>
+			<summary>
+				Clears the collection of validation errors and raises the
+				<see langword="ErrorsChanged" /> event for each property.
+			</summary>
+		</ClearErrors>
+		<OnErrorsChanged>
+			<summary>
+				Raises the <see langword="ErrorsChanged" /> event on the given property.
+			</summary>
+			<param name="propertyName">
+				The name of the property on which to raise the <see langword="ErrorsChanged" /> event.
+			</param>
+		</OnErrorsChanged>
+	</members>
+	<members name="observable">
+		<Observable>
+			<summary>
+				An abstract base class that provides for property change notification.
+			</summary>
+			<remarks>
+				Implements the <see cref="INotifyPropertyChanged" /> interface.
+			</remarks>
+		</Observable>
+		<PropertyChanged>
+			<summary>
+				An event that gets raised when a property value has changed.
+			</summary>
+		</PropertyChanged>
+		<OnPropertyChanged>
+			<summary>
+				Raises the <see langword="PropertyChanged" /> event on the given property.
+			</summary>
+			<param name="propertyName">
+				The name of the property for which we want to raise the
+				<see langword="PropertyChanged" /> event.
+			</param>
+		</OnPropertyChanged>
+	</members>
+</docs>

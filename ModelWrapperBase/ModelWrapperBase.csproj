@@ -1,0 +1,28 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net6.0-windows</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+        <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+        <PackageId>ModelWrapperBase</PackageId>
+        <Title>Model Wrapper Base Class</Title>
+        <Authors>David R Slocum</Authors>
+        <Product>ModelWrapperBase</Product>
+        <Description>Provides a wrapper class and supporting tools for wrapping a model object. The wrapper provides property change notification, revertible change tracking, validation, and data error notification.</Description>
+        <NeutralLanguage>en-US</NeutralLanguage>
+        <GenerateDocumentationFile>True</GenerateDocumentationFile>
+        <PackageReadmeFile>README.md</PackageReadmeFile>
+        <PackageOutputPath>C:\Users\dave0\Packages</PackageOutputPath>
+        <EnforceCodeStyleInBuild>True</EnforceCodeStyleInBuild>
+        <PackageTags>c# model wrapper mvvm property change notification revertible validation</PackageTags>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <None Update="README.md">
+            <Pack>True</Pack>
+            <PackagePath>\</PackagePath>
+        </None>
+    </ItemGroup>
+
+</Project>

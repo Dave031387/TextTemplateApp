@@ -1,0 +1,145 @@
+﻿<docs>
+	<members name="classpropertyparser">
+		<ClassPropertyParser>
+			<summary>
+				The <see cref="ClassPropertyParser" /> class is used for extracting property information from
+				an object.
+			</summary>
+		</ClassPropertyParser>
+		<IClassPropertyParser>
+			<summary>
+				An interface for classes that extract property information from an object.
+			</summary>
+		</IClassPropertyParser>
+		<Constructor1>
+			<summary>
+				Creates an instance of the <see cref="ClassPropertyParser" /> class.
+			</summary>
+		</Constructor1>
+		<Constructor2>
+			<summary>
+				Creates an instance of the <see cref="ClassPropertyParser" /> class and retrieves all
+				class types defined in the same assembly as the given class type.
+			</summary>
+			<param name="classType">
+				A class type for which we want to retrieve the property information.
+			</param>
+		</Constructor2>
+		<ClassTypes>
+			<summary>
+				Gets an <see cref="IEnumerable" /> collection of <see cref="Type" /> objects corresponding
+				to the class types contained in a single assembly.
+			</summary>
+		</ClassTypes>
+		<CollectionProperties>
+			<summary>
+				Gets an <see cref="IEnumerable" /> collection of <see cref="PropertyInfo" /> objects
+				corresponding to all collection properties found in a single class object.
+				<para>A collection property is any property that returns a collection of objects.</para>
+			</summary>
+		</CollectionProperties>
+		<ComplexProperties>
+			<summary>
+				Gets an <see cref="IEnumerable" /> collection of <see cref="PropertyInfo" /> objects
+				corresponding to all complex properties found in a single class object.
+				<para>
+					A complex property is any property that returns an object that is not a value type,
+					<see langword="string" />, or collection.
+				</para>
+			</summary>
+		</ComplexProperties>
+		<SimpleProperties>
+			<summary>
+				Gets an <see cref="IEnumerable" /> collection of <see cref="PropertyInfo" /> objects
+				corresponding to all simple properties found in a single class object.
+				<para>
+					A simple property is any property that returns an object that is either a value type or
+					a <see langword="string" />.
+				</para>
+			</summary>
+		</SimpleProperties>
+		<GetTypeName>
+			<summary>
+				A static method that gets the fully qualified type name for the given type.
+			</summary>
+			<param name="type">
+				The type for which the fully qualified type name is to be retrieved.
+			</param>
+			<returns>
+				The fully qualified type name, including generic parameters if applicable.
+			</returns>
+			<exception cref="ArgumentNullException">
+				Thrown if the given type is generic and the fully qualified name couldn't be determined.
+			</exception>
+			<exception cref="InvalidOperationException">
+				Thrown if the given type is generic and the generic parameters couldn't be determined.
+			</exception>
+		</GetTypeName>
+		<GetAllProperties>
+			<summary>
+				Retrieves the property information for all simple, complex, and collection properties
+				defined for the given class type.
+			</summary>
+			<param name="classType">
+				The class type for which we want to retrieve the property information.
+			</param>
+		</GetAllProperties>
+		<GetClassTypes>
+			<summary>
+				Retrieves the type information for all visible class types found in the same assembly as
+				the given class type.
+			</summary>
+			<param name="classType">
+				One of the class types from an assembly containing multiple class types.
+			</param>
+			<returns>
+				An <see cref="IEnumerable" /> collection of <see cref="Type" /> objects.
+			</returns>
+		</GetClassTypes>
+		<GetCollectionProperties>
+			<summary>
+				Gets the <see cref="IEnumerable" /> collection of <see cref="PropertyInfo" /> objects
+				corresponding to all collection properties defined for the given class type.
+				<para>A collection property is any property that returns a collection of objects.</para>
+			</summary>
+			<param name="classType">
+				The class type for which we want to retrieve the collection property information.
+			</param>
+			<returns>
+				An <see cref="IEnumerable" /> collection of <see cref="PropertyInfo" /> objects.
+			</returns>
+		</GetCollectionProperties>
+		<GetComplexProperties>
+			<summary>
+				Gets the <see cref="IEnumerable" /> collection of <see cref="PropertyInfo" /> objects
+				corresponding to all complex properties defined for the given class type.
+				<para>
+					A complex property is any property that returns an object that is not a value type,
+					<see langword="string" />, or collection.
+				</para>
+			</summary>
+			<param name="classType">
+				The class type for which we want to retrieve the complex property information.
+			</param>
+			<returns>
+				An <see cref="IEnumerable" /> collection of <see cref="PropertyInfo" /> objects.
+			</returns>
+		</GetComplexProperties>
+		<GetSimpleProperties>
+			<summary>
+				Gets the <see cref="IEnumerable" /> collection of <see cref="PropertyInfo" /> objects
+				corresponding to all simple properties defined for the given class type.
+				<para>
+					A simple property is any property that returns an object that is either a value type or
+					a <see langword="string" />.
+				</para>
+			</summary>
+			<param name="classType">
+				The class type for which we want to retrieve the simple property information.
+			</param>
+			<returns>
+				An <see cref="IEnumerable" /> collection of <see cref="PropertyInfo" /> objects.
+			</returns>
+		</GetSimpleProperties>
+	</members>
+</docs>
